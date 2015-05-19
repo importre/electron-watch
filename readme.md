@@ -21,6 +21,11 @@ require('electron-watch').start(app, mainWindow[, options]);
 
 ### start(app, mainWindow\[, options\])
 
+watches `options.root` directory, except for `options.ignored`,
+and reloads electron app when changed.
+
+relaunches electron app when `options.index.js` is changed.
+
 param              | description
 -------------------|-------------------------------
 app                | *Required*. See [app].
@@ -32,9 +37,9 @@ options            | *Optional*. See below.
 - Default:
 ```js
 {
-	root: '.',
-	entry: 'index.js',
-	ignored: [
+	root: '.',         // watch root directory.
+	entry: 'index.js', // relaunch electron app when this file is changed.
+	ignored: [         // string, regexp and/or glob are/is supported.
 		'node_modules',
 		/[\/\\]\./,
 		'build',
