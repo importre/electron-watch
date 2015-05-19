@@ -13,33 +13,40 @@ $ npm install --save electron-watch
 ## Usage
 
 ```js
-require('electron-watch').watch(['**/*', function() {
-	// do whatever you want
-});
+require('electron-watch').start(app, mainWindow[, options]);
 ```
 
 
 ## API
 
-### electronWatch(input, [options])
+### start(app, mainWindow\[, options\])
 
-#### input
-
-*Required*  
-Type: `string`
-
-Lorem ipsum.
+param              | description
+-------------------|-------------------------------
+app                | *Required*. See [app].
+mainWindow         | *Required*. See [mainWindow].
+options            | *Optional*. See below.
 
 #### options
-
-##### foo
-
-Type: `boolean`  
-Default: `false`
-
-Lorem ipsum.
-
+- Type: `object`  
+- Default:
+```js
+{
+	root: '.',
+	entry: 'index.js',
+	ignored: [
+		'node_modules',
+		/[\/\\]\./,
+		'build',
+		'.*.swp'
+	]
+}
+```
 
 ## License
 
 MIT © [Electron Korea](http://github.com/electronkr)
+
+
+[app]: https://github.com/atom/electron/blob/master/docs/api/app.md
+[mainWindow]: https://github.com/atom/electron/blob/master/docs/api/browser-window.md
