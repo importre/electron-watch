@@ -21,7 +21,9 @@
   "keywords": [
     ""
   ],
-  "dependencies": {},
+  "dependencies": {
+    "chokidar": "^1.0.1"
+  },
   "devDependencies": {
     "mocha": "*"
   }

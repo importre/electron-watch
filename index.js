@@ -1,10 +1,39 @@
 'use strict';
-module.exports = function (str, opts) {
-	if (typeof str !== 'string') {
-		throw new TypeError('Expected a string');
-	}
 
-	opts = opts || {};
+const path = require('path');
+const fork = require('child_process').fork;
+const spawn = require('child_process').spawn;
 
-	return str + ' & ' + (opts.postfix || 'rainbows');
+const defaultOptions = {
+  root: '.',
+  entry: 'index.js',
+  ignored: [
+    'node_modules',
+    /[\/\\]\./,
+    'build',
+    '.*.swp'
+  ]
+};
+
+module.exports = {
+  start: function (app, browserWindow, options) {
+    options = options || {};
+
+    var chokidar = require('chokidar');
+
+    var root = options.root || defaultOptions.root;
+    var entry = options.entry || defaultOptions.entry;
+    var ignored = (options.ignored instanceof Array) || defaultOptions.ignored;
+
+    var watcher = chokidar.watch(root, {ignored: ignored});
+    watcher.on('change', function (name) {
+      if (name === entry) {
+        app.quit();
+        var client = path.join(__dirname, 'client.js');
+        fork(client);
+      } else {
+        browserWindow.reloadIgnoringCache();
+      }
+    });
+  }
 };
