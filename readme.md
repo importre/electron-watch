@@ -28,7 +28,7 @@ app.watch(mainWindow[, options]);
 
 ## API
 
-### start(mainWindow\[, options\])
+### watch(mainWindow\[, options\])
 
 watches `options.root` directory, except for `options.ignored`,
 and reloads electron app when changed.
