@@ -13,13 +13,22 @@ $ npm install --save electron-watch
 ## Usage
 
 ```js
-require('electron-watch').start(app, mainWindow[, options]);
+const app = require('app');
+
+require('electron-watch');
+
+var mainWindow = new BrowserWindow({
+	width: 800,
+	height: 600
+});
+
+app.watch(mainWindow[, options]);
 ```
 
 
 ## API
 
-### start(app, mainWindow\[, options\])
+### start(mainWindow\[, options\])
 
 watches `options.root` directory, except for `options.ignored`,
 and reloads electron app when changed.
@@ -28,8 +37,7 @@ relaunches electron app when `options.index.js` is changed.
 
 param              | description
 -------------------|-------------------------------
-app                | *Required*. See [app].
-mainWindow         | *Required*. See [mainWindow].
+mainWindow         | *Required*. See [browser-window].
 options            | *Optional*. See below.
 
 #### options
@@ -53,5 +61,4 @@ options            | *Optional*. See below.
 MIT © [Electron Korea](http://github.com/electronkr)
 
 
-[app]: https://github.com/atom/electron/blob/master/docs/api/app.md
-[mainWindow]: https://github.com/atom/electron/blob/master/docs/api/browser-window.md
+[browser-window]: https://github.com/atom/electron/blob/master/docs/api/browser-window.md
