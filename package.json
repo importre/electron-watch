@@ -26,5 +26,9 @@
   },
   "devDependencies": {
     "mocha": "*"
+  },
+  "bin": {
+    "watchserver": "server.bin.js",
+    "watchclient": "client.bin.js"
   }
 }

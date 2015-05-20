@@ -29,7 +29,7 @@ module.exports = {
     watcher.on('change', function (name) {
       if (name === entry) {
         app.quit();
-        var client = path.join(__dirname, 'client.js');
+        var client = path.join(__dirname, 'client.bin.js');
         fork(client);
       } else {
         browserWindow.reloadIgnoringCache();

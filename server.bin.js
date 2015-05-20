@@ -1,10 +1,12 @@
+#!/usr/bin/env node
+
 'use strict';
 
 var net = require('net');
 var path = require('path');
 var spawn = require('child_process').spawn;
 var child = null;
-var port = 8507;
+var config = require('./config.js');
 
 var server = net.createServer(function (c) {
   if (child) child.kill();
@@ -26,17 +28,15 @@ var server = net.createServer(function (c) {
 });
 
 function runClient() {
-  var client = path.join(__dirname, 'client.js');
+  var client = path.join(__dirname, 'client.bin.js');
   spawn('node', [client], {
     detached: true
   }).unref();
 }
 
-server.listen(port, function (e) {
+server.listen(config.port, function (e) {
   runClient();
 });
 
 server.on('error', function (e) {
 });
-
-module.exports = port;

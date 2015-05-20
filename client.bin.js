@@ -1,10 +1,12 @@
+#!/usr/bin/env node
+
 'use strict';
 
 var net = require('net');
-var port = require('./server.js');
+var config = require('./config.js');
 
 function connect() {
-  return net.connect({port: port}, function () {
+  return net.connect({port: config.port}, function () {
     client.write('hello');
   });
 }
