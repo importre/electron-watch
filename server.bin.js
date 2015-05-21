@@ -7,10 +7,19 @@ var path = require('path');
 var spawn = require('child_process').spawn;
 var child = null;
 var config = require('./config.js');
+var win32 = process.platform === 'win32';
 
 var server = net.createServer(function (c) {
-  if (child) child.kill();
-  child = spawn('electron', ['--dev', '.']);
+  if (child) {
+    if (win32) {
+      spawn("taskkill", ["/pid", child.pid, '/f', '/t']);
+    } else {
+      child.kill();
+    }
+  }
+
+  var cmd = win32 ? 'electron.cmd' : 'electron';
+  child = spawn(cmd, ['--dev', '.']);
 
   child.stdout.on('data', function (data) {
     console.log(data + '');

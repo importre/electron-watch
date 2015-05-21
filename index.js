@@ -1,8 +1,7 @@
 'use strict';
 
 const path = require('path');
-const fork = require('child_process').fork;
-const spawn = require('child_process').spawn;
+const exec = require('child_process').exec;
 const pkg = require('./package.json');
 
 const defaultOptions = {
@@ -30,8 +29,7 @@ app.watch = function (browserWindow, options) {
   watcher.on('change', function (name) {
     if (name === entry) {
       app.quit();
-      var client = path.join(__dirname, 'client.bin.js');
-      fork(client);
+      exec('watchclient');
     } else {
       browserWindow.reloadIgnoringCache();
     }
